@@ -4,36 +4,37 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Feedback;
+use Illuminate\Support\Facades\Storage;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Feedback>
  */
 class FeedbackFactory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function create($attributes = [], $saveTo = "database")
+    protected string $saveTo; 
+
+    public function __construct($saveTo = "database"){
+        $this->saveTo = $saveTo;
+    }
+    
+    public function save($attributes = [])
     {
         $feedback = Feedback::create(
             $attributes
         );
 
-        if ($saveTo == "database"){
+        if ($this->saveTo == "database"){
             $feedback->save();    
         }
 
-        elseif($saveTo == "email"){
-            
+        elseif($this->saveTo == "email"){
+            $name = $feedback->name;
+            $message = $feedback->message;
+            Storage::disk('feedback_local')->append('feedbacks', "Имя: $name \nОбиащение: $message\n");
         }
-
 
         return $feedback;
 
-        return [
-            
-        ];
     }
 }

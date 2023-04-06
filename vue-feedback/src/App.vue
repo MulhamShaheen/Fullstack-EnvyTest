@@ -5,18 +5,14 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue " class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!!" />
+      <HelloWorld msg="Мульхам Шахин" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/test">test</RouterLink>
-        <RouterLink to="/list">Список обратной связи</RouterLink>
-
-
+        <RouterLink to="/feedback">Форма обратной связи</RouterLink>
+        <RouterLink to="/list">Список обращений</RouterLink>
       </nav>
     </div>
   </header>
@@ -42,12 +38,15 @@ nav {
   margin-top: 2rem;
 }
 
+
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: whitesmoke;
 }
+
 
 nav a.router-link-exact-active:hover {
   background-color: transparent;
+
 }
 
 nav a {

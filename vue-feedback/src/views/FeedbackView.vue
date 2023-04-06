@@ -21,10 +21,6 @@ import axios from "axios"
         Отправить
       </button>
     </div>
-
-    <pre>
-      {{ $store.state.feedback }}
-    </pre>
   </main>
 </template>
 
