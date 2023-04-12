@@ -9,9 +9,9 @@ class FeedbackController extends Controller
 {
     public function saveFeedback(Request $request)
     {
-        
+        $feedback = FeedbackFactory::factory($request->all());
+        FeedbackFactory::save($feedback, 'email');
 
-        $factory = new FeedbackFactory("email");
-        return $factory->save($request->all());
+        return $feedback;
     }
 }

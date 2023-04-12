@@ -12,29 +12,27 @@ use Illuminate\Support\Facades\Storage;
  */
 class FeedbackFactory
 {
-    protected string $saveTo; 
-
-    public function __construct($saveTo = "database"){
-        $this->saveTo = $saveTo;
-    }
     
-    public function save($attributes = [])
+    public static function factory(array $attributes)
     {
-        $feedback = Feedback::create(
+        $feedback = new Feedback(
             $attributes
         );
 
-        if ($this->saveTo == "database"){
+
+        return $feedback;
+    }
+
+    public static function save(Feedback $feedback, $saveTo="email"){
+        
+        if ($saveTo == "database"){
             $feedback->save();    
         }
 
-        elseif($this->saveTo == "email"){
+        elseif($saveTo == "email"){
             $name = $feedback->name;
             $message = $feedback->message;
             Storage::disk('feedback_local')->append('feedbacks', "Имя: $name \nОбиащение: $message\n");
         }
-
-        return $feedback;
-
     }
 }
